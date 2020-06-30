@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>二手交易系统 | 所有退款申请</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+
+    <!-- FooTable -->
+    <link th:href="@{/css/plugins/footable/footable.core.css}" rel="stylesheet" />
+
+    <link th:href="@{/css/animate.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+
+    <!-- Sweet Alert -->
+    <link th:href="@{/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:include="rootNav :: navigation"></nav>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="border-bottom" th:include="rootHeader :: headerTop"></div>
+        <div class="row wrapper border-bottom white-bg page-heading" th:fragment="headerNav">
+            <div class="col-lg-10">
+                <h2>所有退款申请</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="rootAllJudgeTrade">管理员入口</a>
+                    </li>
+                    <li class="active">
+                        <strong>退款申请</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>所有退款申请</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                <thead>
+                                <tr>
+                                    <th data-toggle="true" nowrap="nowrap">交易ID</th>
+                                    <th data-hide="none" nowrap="nowrap">商品名称</th>
+                                    <th data-hide="phone" nowrap="nowrap">卖家</th>
+                                    <th data-hide="phone" nowrap="nowrap">买家</th>
+                                    <th data-hide="all" nowrap="nowrap">商品描述</th>
+                                    <th data-hide="phone" nowrap="nowrap">价格</th>
+                                    <th data-hide="phone" nowrap="nowrap">产品状态</th>
+                                    <th class="text-left" data-sort-ignore="true" nowrap="nowrap">产品操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="trade:${allJudgeTradeList}">
+                                    <td th:text="${trade.getTid()}"></td>
+                                    <td th:text="${trade.getName()}"></td>
+                                    <td th:text="${trade.getSellusername()}"></td>
+                                    <td th:text="${trade.getBuyusername()}"></td>
+                                    <td th:text="${trade.getDescription()}"></td>
+                                    <td th:text="'$'+${trade.getPrice()}"></td>
+                                    <td><span th:class="'label label-'+${trade.getLevel()}" th:text="${trade.getStatusString()}"></span></td>
+                                    <td class="text-left">
+                                        <div class="btn-group">
+                                            <button class="btn-white btn btn-xs" th:onclick="'javascript:checkTrade('+${trade.getTid()}+')'">查看</button>
+                                            <button class="btn-white btn btn-xs" th:onclick="'javascript:judge('+${trade.getTid()}+')'" th:disabled="${trade.getJudge()}">仲裁</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer" th:include="footer :: copyright"></div>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script th:src="@{/js/jquery-2.1.1.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+<!-- Peity -->
+<script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
+
+<!-- Custom and plugin javascript -->
+<script th:src="@{/js/inspinia.js}"></script>
+<script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+
+<!-- Toastr script -->
+<script th:src="@{/js/plugins/toastr/toastr.min.js}"></script>
+
+<!-- common -->
+<script th:src="@{/js/common.js}"></script>
+
+<!-- SUMMERNOTE -->
+<script th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
+
+<!-- FooTable -->
+<script th:src="@{/js/plugins/footable/footable.all.min.js}"></script>
+
+<!-- Sweet alert -->
+<script th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script>
+
+<!-- Page-Level Scripts -->
+<script>
+    $(document).ready(function() {
+
+        $('.footable').footable();
+
+    });
+
+</script>
+
+<script th:inline="javascript">
+    function checkTrade(tradeId) { window.location.href = "rootTradeDetail?tid=" + tradeId;}
+    function judge(tradeId) {
+        swal({
+            title: "是否通过退款申请？",
+            text: "若通过，交易钱款将会原路返回买家账户，这笔交易将被置为下架状态；若不通过，则此交易恢复退款申请前的状态。",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "取消",
+                    value: "cancel",
+                    visible: true,
+                    closeModal: true,
+                },
+                reject: {
+                    text: "不通过",
+                    value: "reject",
+                    visible: true,
+                    closeModal: true
+                },
+                confirm: {
+                    text: "通过",
+                    value: "confirm",
+                    visible: true,
+                    closeModal: true
+                },
+            },
+        })
+        .then((value) => {
+            var isPass = true;
+            switch (value) {
+                case "cancel":
+                    return;
+                case "reject":
+                    isPass = false;
+                    break;
+                case "confirm":
+                    isPass = true;
+                    break;
+                default:
+                    return;
+            }
+            var temp = document.createElement("form");
+            temp.action = "rootAllJudgeTrade";
+            temp.method = "post";
+            temp.style.display = "none";
+            var tid = document.createElement("input");
+            tid.name = "tid";
+            tid.value = tradeId;
+            temp.appendChild(tid);
+            var pass = document.createElement("input");
+            pass.name = "pass";
+            pass.value = isPass;
+            temp.appendChild(pass);
+            document.body.appendChild(temp);
+            temp.submit();
+        });
+    }
+</script>
+
+</body>
+
+</html>

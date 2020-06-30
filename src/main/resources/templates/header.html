@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="row border-bottom" th:fragment="headerTop">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="market">
+                        <span class="m-r-sm text-muted welcome-message">二手物品交易系统</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="login">
+                        <i class="fa fa-sign-out"></i> 登 出
+                    </a>
+                </li>
+            </ul>
+        </nav>
+	</div>
+</body>
+</html>

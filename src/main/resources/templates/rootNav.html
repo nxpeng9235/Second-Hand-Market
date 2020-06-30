@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+	<nav class="navbar-default navbar-static-side" role="navigation" th:fragment="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element" align="center">
+                    	<span>
+                            <img alt="image" class="img-circle" th:src="@{/img/a4.jpg}" height="48px" width="48px" />
+                             <!--<img  th:src="@{'/img/user/'+${session.user.getUserName()}+'.jpg'}" alt="image" class="img-circle" height="48px" width="48px"/>-->
+                            <!--<tb th:text="@{session.user.getImage()}"></tb>-->
+						</span>
+                    	<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> 
+                            	<span class="block m-t-xs">
+                            		<strong class="font-bold" th:text="${session.account.getUsername()}"></strong>
+                             	</span> 
+                             </span>
+                     	</a>
+                    </div>
+                    <div class="logo-element">
+                        WG
+                    </div>
+                </li>
+                <li>
+                    <a th:href="@{rootAllTrade}"><i class="fa fa-list"></i> <span class="nav-label">所有交易</span></a>
+                </li>
+                <li>
+                    <a th:href="@{rootAllJudgeTrade}"><i class="fa fa-warning"></i> <span class="nav-label">退款申请</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>
+</html>
+
+
+

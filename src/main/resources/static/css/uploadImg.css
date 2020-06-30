@@ -1,0 +1,115 @@
+   .main {
+       width: 80%;
+       margin: 0 auto;
+   }
+   
+   .upload-content .modal-dialog {
+       width: 100%;
+   }
+   
+   .show {
+       text-align: center;
+   }
+   
+   .upload-content .content-img-list {
+       display: inline-block;
+       padding: 0;
+   }
+   
+   .upload-content .content-img .gcl {
+       font-size: 25px;
+       color: #aaa;
+   }
+   
+   .upload-content .content-img-list-item {
+       position: relative;
+       display: inline-block;
+       width: 150px;
+       height: 150px;
+       margin: 7px;
+       border: 1px dashed #DEDEDE;
+       border-radius: 4px;
+       background-color: #fff;
+       vertical-align: middle;
+       line-height: 150px;
+   }
+   
+   .upload-content .content-img-list-item .hide {
+       display: none;
+   }
+   
+   .upload-content .content-img-list-item div {
+       position: absolute;
+       left: 0;
+       bottom: 0;
+       text-align: center;
+       width: 100%;
+       background: rgba(0, 0, 0, 0.4);
+       height: 100%;
+       line-height: 150px;
+   }
+   
+   .upload-content .content-img-list-item .delete-btn,
+   .upload-content .content-img-list-item .big-btn {
+       color: #fff;
+       cursor: pointer;
+       margin: 0 5px;
+   }
+   
+   .upload-content .content-img-list-item img {
+       width: 100%;
+   }
+   /*.upload-content .upload-tips {
+       padding-top: 10px;
+       text-align: right;
+       width: 100%;
+   }*/
+   /*图片上传按钮*/
+   
+   .upload-content .file {
+       position: relative;
+       display: inline-block;
+       border: 1px dashed #DEDEDE;
+       border-radius: 4px;
+       width: 150px;
+       height: 150px;
+       line-height: 150px;
+       text-align: center;
+       background-color: #fff;
+       vertical-align: top;
+       margin: 7px;
+   }
+   
+   .upload-content .file input {
+       position: absolute;
+       right: 0;
+       top: 0;
+       opacity: 0;
+       cursor: pointer;
+       width: 150px;
+       height: 150px;
+   }
+   
+   .upload-content .file:hover {
+       border: 1px dashed #3a75dc;
+   }
+   
+   #imgPreview {
+       width: 40%;
+       height: 180px;
+       margin: 10px auto 0px auto;
+       border: 1px solid black;
+       text-align: center;
+   }
+   
+   #imgSpan {
+       position: absolute;
+       top: 60px;
+       left: 40px;
+   }
+   
+   .filepath {
+       width: 100%;
+       height: 100%;
+       opacity: 0;
+   }

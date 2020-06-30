@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+	<nav class="navbar-default navbar-static-side" role="navigation" th:fragment="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element" align="center">
+                    	<span>
+                            <img alt="image" class="img-circle" th:src="@{/img/cat.jpg}" height="48px" width="48px" />
+                             <!--<img  th:src="@{'/img/user/'+${session.user.getUserName()}+'.jpg'}" alt="image" class="img-circle" height="48px" width="48px"/>-->
+                            <!--<tb th:text="@{session.user.getImage()}"></tb>-->
+						</span>
+                    	<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> 
+                            	<span class="block m-t-xs">
+                            		<strong class="font-bold" th:text="${session.account.getUsername()}">username</strong>
+                             	</span> 
+                             </span>
+                     	</a>
+                    </div>
+                    <div class="logo-element">
+                        WG
+                    </div>
+                </li>
+                <li>
+                    <a th:href="@{market}"><i class="fa fa-shopping-cart"></i> <span class="nav-label">市场</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-list"></i> <span class="nav-label">交易管理</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li id="myBuyTrade"><a th:href="@{myBuyTrade}">我买到的</a></li>
+                        <li id="mySellTrade"><a th:href="@{mySellTrade}">我卖出的</a></li>
+                        <li id="myJudge"><a th:href="@{myJudgeTrade}">我的退款</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">用户管理</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li id="deposit"><a th:href="@{deposit}">账户充值</a></li>
+                        <li id="userManage"><a th:href="@{userManage}">信息修改</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>
+</html>
+
+
+

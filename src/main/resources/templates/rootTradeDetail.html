@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>二手交易系统 | 商品详情</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
+
+    <link th:href="@{/css/plugins/slick/slick.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/slick/slick-theme.css}" rel="stylesheet">
+
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+    <!-- Sweet Alert -->
+    <link th:href="@{/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet"/>
+
+</head>
+
+<body onload="checkUsername()">
+
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:include="rootNav :: navigation"></nav>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="border-bottom" th:include="rootHeader :: headerTop"></div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>交易商品详情</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="rootAllTrade">管理员入口</a>
+                    </li>
+                    <li class="active">
+                        <strong>商品详情</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox product-detail">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="product-images">
+                                        <div th:each="figPath : ${trade.getFigpathList()}" align="center">
+                                            <img th:src="${figPath}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h2 class="font-bold m-b-xs" th:text="${trade.getName()}">name</h2>
+                                    <hr>
+                                    <div class="col-sm-6 col-md-6">
+                                        <h1 class="product-main-price"><strong th:text="'$'+${trade.getPrice()}"></strong></h1>
+                                    </div>
+                                    <div>
+                                        <button id="button-buy" class="btn btn-md btn-primary m-t-n-xs" th:text="购买" style="visibility: hidden"></button>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-xs-5 col-md-5 col-lg-5">
+                                                <h4>卖家</h4>
+                                                <div class="small text-muted">
+                                                    <p th:text="${trade.getSellusername()}"></p>
+                                                </div>
+                                            </div>
+                                            <div id="buyer" class="col-xs-5 col-md-5 col-lg-5">
+                                                <h4>买家</h4>
+                                                <div class="small text-muted">
+                                                    <p th:text="${trade.getBuyusername()}"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <h4>商品描述</h4>
+                                        <div class="small m-t-md">
+                                            <p th:text="${trade.getDescription()}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer" th:include="footer :: copyright"></div>
+    </div>
+</div>
+
+
+
+<!-- Mainly scripts -->
+<script th:src="@{/js/jquery-2.1.1.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+<!-- Custom and plugin javascript -->
+<script th:src="@{/js/inspinia.js}"></script>
+<script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+
+<!-- slick carousel-->
+<script th:src="@{/js/plugins/slick/slick.min.js}"></script>
+
+<!-- Sweet alert -->
+<script th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script>
+
+<script>
+    $(document).ready(function(){
+
+        $('.product-images').slick({
+            dots: true
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>

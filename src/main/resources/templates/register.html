@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>二手交易系统 | 注册</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <!-- Sweet Alert -->
+    <link th:href="@{/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet"/>
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <div>
+                <h2 class="logo-name">WG</h2>
+            </div>
+            <h3>欢迎注册</h3>
+            <!--<p>Create account to see it in action.</p>-->
+            <form id="form-register" class="m-t" role="form" action="register" method="post">
+                <div class="form-group">
+                    <input id="username" type="text" class="form-control" placeholder="用户名" name="username" required="" autocomplete="off"/>
+                </div>
+                <div class="form-group">
+                    <input id="password" type="password" class="form-control" placeholder="密码" name="password" required="" autocomplete="off"/>
+                </div>
+                <div class="form-group">
+                    <input id="password-repeat" type="password" class="form-control" placeholder="重复密码" name="password-repeat" required="" autocomplete="off"/>
+                </div>
+                <div class="form-group">
+                    <input id="address" type="text" class="form-control" placeholder="地址" name="address" required=""/>
+                </div>
+                <button type="button" class="btn btn-primary block full-width m-b" onclick="submitForm()">注  册</button>
+
+                <a class="btn btn-sm btn-white btn-block" th:href="login" href="login">登  录</a>
+            </form>
+            <!--<p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>-->
+        </div>
+    </div>
+
+    <div class="footer" th:include="footer :: copyright"></div>
+
+    <!-- Mainly scripts -->
+    <script th:src="@{/js/jquery-2.1.1.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <!-- Sweet alert -->
+    <script th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script>
+
+    <script th:inline="javascript">
+        function submitForm() {
+            var un = document.getElementById("username").value;
+            var pw = document.getElementById("password").value;
+            var pwRepeat = document.getElementById("password-repeat").value;
+            var ad = document.getElementById("address").value;
+            if (pw != pwRepeat){
+                swal("温馨提示", "两次输入的密码不一致！", "warning");
+                return;
+            }
+            if (un == "" || pw == "" || ad == ""){
+                swal("温馨提示", "请完善所有信息！", "warning");
+                return;
+            }
+            swal("注册成功！", "您的用户名为: " + un, "success")
+            .then(function () {
+                $("#form-register").submit();
+            });
+        }
+    </script>
+
+    <script th:inline="javascript">
+        var error = [[${error}]];
+        $(document).ready(function () {
+            if(error!=null){
+                swal("温馨提示", error, "warning");
+            }
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+encrypt-type: # 0：普通， 1：国密
+  encrypt-type: 0
+
+group-channel-connections-config:
+  caCert: classpath:ca.crt
+  sslCert: classpath:sdk.crt
+  sslKey: classpath:sdk.key
+  all-channel-connections:
+    - group-id: 1 #group ID
+      connections-str:
+        # 若节点小于v2.3.0版本，查看配置项listen_ip:channel_listen_port
+        - 10.211.55.4:20200 # node channel_listen_ip:channel_listen_port
+        - 10.211.55.4:20201
+    - group-id: 2
+      connections-str:
+        # 若节点小于v2.3.0版本，查看配置项listen_ip:channel_listen_port
+        - 10.211.55.4:20202 # node channel_listen_ip:channel_listen_port
+        - 10.211.55.4:20203
+channel-service:
+  group-id: 1 # sdk实际连接的群组
+  agency-name: fisco # 机构名称

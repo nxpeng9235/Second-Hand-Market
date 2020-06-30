@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>二手交易系统 | 市场</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation" th:include="nav :: navigation"></nav>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="border-bottom" th:include="header :: headerTop"></div>
+            <div class="row wrapper border-bottom white-bg page-heading" th:fragment="headerNav">
+                <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6">
+                    <h2>市场</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="market">首页</a>
+                        </li>
+                        <li class="active">
+                            <strong>市场</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6" align="left">
+                    <a href="newTrade">
+                        <button class="btn btn-md btn-primary" style="vertical-align:middle;position:absolute;top:30px;"><strong>发布新的商品</strong></button>
+                    </a>
+                </div>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div th:each="trade: ${tradeList}">
+                        <div class="col-lg-4">
+                            <div class="contact-box">
+                                <a th:href="@{'tradeDetail?tid='+${trade.getTid()}}">
+                                    <div class="col-sm-4">
+                                        <div class="text-center" align="center">
+                                            <img alt="image" class="img-container m-t-xs img-responsive" th:src="${trade.getFigpathList()[0]}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <h2><strong th:text="${trade.getName()}">name</strong></h2>
+                                        <p>卖家：<strong th:text="${trade.getSellusername()}">sellusername</strong></p>
+                                        <p>描述：<b th:text="${trade.getDescription()}">description></b></p>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <h1>售价：$<strong th:text="${trade.getPrice()}">price</strong></h1>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer" th:include="footer :: copyright"></div>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+
+
+</body>
+
+</html>

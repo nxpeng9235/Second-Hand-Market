@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>二手交易系统 | 商品详情</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
+
+    <link th:href="@{/css/plugins/slick/slick.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/slick/slick-theme.css}" rel="stylesheet">
+
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+    <!-- Sweet Alert -->
+    <link th:href="@{/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet"/>
+
+</head>
+
+<body onload="checkUsername()">
+
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:include="nav :: navigation"></nav>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="border-bottom" th:include="header :: headerTop"></div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>交易商品详情</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="market">主页</a>
+                    </li>
+                    <li>
+                        <a href="market">市场</a>
+                    </li>
+                    <li class="active">
+                        <strong>商品详情</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox product-detail">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="product-images">
+                                        <div th:each="figPath : ${trade.getFigpathList()}" align="center">
+                                            <img th:src="${figPath}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h2 class="font-bold m-b-xs" th:text="${trade.getName()}">name</h2>
+                                    <hr>
+                                    <div class="col-sm-6 col-md-6">
+                                        <h1 class="product-main-price"><strong th:text="'$'+${trade.getPrice()}"></strong></h1>
+                                    </div>
+                                    <div>
+                                        <a id="button-buy-link" data-toggle="modal" href="#buy">
+                                            <button id="button-buy" class="btn btn-md btn-primary m-t-n-xs" th:text="购买"><strong></strong></button>
+                                        </a>
+                                    </div>
+                                    <div id="buy" class="modal fade" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div><h2 class="m-t-none m-b"><strong>购买</strong></h2>
+                                                            <h4><strong>你将要购买的商品：</strong></h4>
+                                                            <h4><strong th:text="${trade.getName()}"></strong></h4>
+                                                            <hr>
+                                                            <span>商品价格：</span>
+                                                            <h1 class="font-bold" th:text="'$'+${trade.getPrice()}">price</h1>
+                                                            <span class="text-muted small">*当前账户余额：$<strong th:text="${session.account.getBalance()}"></strong></span>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-xs-3 col-md-3" align="right">
+                                                                    <h3>输入密码：</h3>
+                                                                </div>
+                                                                <div class="col-xs-4 col-md-4" align="left">
+                                                                    <input id="pwd" type="password" class="form-control" name="password" required/>
+                                                                </div>
+                                                                <div class="col-xs-5 col-md-5" align="center">
+                                                                    <button class="btn btn-md btn-primary m-t-n-xs" type="button" onclick="submitForm()"><strong>确认购买</strong></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-xs-5 col-md-5 col-lg-5">
+                                                <h4>卖家</h4>
+                                                <div class="small text-muted">
+                                                    <p th:text="${trade.getSellusername()}"></p>
+                                                </div>
+                                            </div>
+                                            <div id="buyer" class="col-xs-5 col-md-5 col-lg-5">
+                                                <h4>买家</h4>
+                                                <div class="small text-muted">
+                                                    <p th:text="${trade.getBuyusername()}"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <h4>商品描述</h4>
+                                        <div class="small m-t-md">
+                                            <p th:text="${trade.getDescription()}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer" th:include="footer :: copyright"></div>
+    </div>
+</div>
+
+
+
+<!-- Mainly scripts -->
+<script th:src="@{/js/jquery-2.1.1.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+<!-- Custom and plugin javascript -->
+<script th:src="@{/js/inspinia.js}"></script>
+<script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+
+<!-- slick carousel-->
+<script th:src="@{/js/plugins/slick/slick.min.js}"></script>
+
+<!-- Sweet alert -->
+<script th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script>
+
+<script>
+    $(document).ready(function(){
+
+        $('.product-images').slick({
+            dots: true
+        });
+
+    });
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById("buyer").style.display="none";
+        if ([[${trade.getStatus()}]] == 1 || [[${trade.getStatus()}]] == 2 || [[${trade.getStatus()}]] == 3){
+            document.getElementById("buyer").style.display="";
+            document.getElementById("button-buy-link").style.visibility="hidden";
+        }
+    })
+</script>
+
+<script>
+    function checkUsername() {
+        var username = "[[${session.account.getUsername()}]]";
+        var selluser = "[[${trade.getSellusername()}]]";
+        if (username == selluser){
+            $('#button-buy').attr("disabled",true);
+            $('#button-buy').attr("title","你无法购买自己发布的商品");
+        }
+    }
+</script>
+
+<script>
+    function checkPassword() {
+        var balance = [[${session.account.getBalance()}]];
+        var price = [[${trade.getPrice()}]];
+        if (balance < price){
+            swal("温馨提示", "您的余额不足！", "warning");
+            return false;
+        }
+        var p1 = document.getElementById("pwd").value;
+        var p2 = [[${session.account.getPassword()}]];
+        if (p1 != p2){
+            swal("温馨提示", "密码错误！", "warning");
+            document.getElementById("pwd").value = "";
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<script th:inline="javascript">
+    function submitForm() {
+        var passwordCorrect = checkPassword();
+        if (passwordCorrect == true){
+            var formFile = new FormData();
+            formFile.append("tid", [[${trade.getTid()}]]);
+            $.ajax({
+                url: 'tradeDetail',
+                type: 'post',
+                cache: false, //上传文件不需要缓存
+                async : false,
+                data: formFile,
+                processData: false, // 此处是关键：告诉jQuery不要去处理发送的数据
+                contentType: false, // 此处是关键：告诉jQuery不要去设置Content-Type请求头
+                success: function (data) {
+                    swal("购买成功！", "本次交易哈希：\n" + data, "success")
+                        .then(function () {
+                            window.location.href="market";
+                        });
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+        else return;
+    }
+</script>
+
+</body>
+
+</html>

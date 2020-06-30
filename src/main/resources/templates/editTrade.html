@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>二手交易系统 | 编辑商品</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+
+    <link th:href="@{/css/animate.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+
+    <!-- Sweet Alert -->
+    <link th:href="@{/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet"/>
+
+    <!-- Upload Images-->
+    <link th:href="@{/css/uploadImg.css}" rel="stylesheet"/>
+    <link th:href="@{/css/gcl.css}" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:include="nav :: navigation"></nav>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="border-bottom" th:include="header :: headerTop"></div>
+        <div class="row wrapper border-bottom white-bg page-heading" th:fragment="headerNav">
+            <div class="col-lg-10">
+                <h2>编辑商品</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="market">首页</a>
+                    </li>
+                    <li>
+                        <a>交易管理</a>
+                    </li>
+                    <li>
+                        <a href="mySellTrade">我卖出的</a>
+                    </li>
+                    <li class="active">
+                        <strong>编辑商品</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab-1"> 商品基本信息</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-2"> 商品图片</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="panel-body">
+                                    <fieldset class="form-horizontal">
+                                        <div class="form-group"><label class="col-sm-2 control-label">商品名称：</label>
+                                            <div class="col-sm-10"><input id="input-name" type="text" class="form-control required" th:value="${trade.getName()}" placeholder="请输入商品名称" autocomplete="off"></div>
+                                        </div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">商品价格：</label>
+                                            <div class="col-sm-10"><input id="input-price" type="text" class="form-control required" th:value="${trade.getPrice()}" placeholder="请输入价格" autocomplete="off"></div>
+                                        </div>
+                                        <div class="form-group"><label class="col-sm-2 control-label">商品描述：</label>
+                                            <div class="col-sm-10"><textarea id="input-description" class="form-control required" rows="10" style="resize: vertical" th:text="${trade.getDescription()}" placeholder="请输入商品描述" autocomplete="off"></textarea></div>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12" align="right">
+                                                <button class="btn btn-white" onclick="toMySellTrade()">取消</button>
+                                                <button class="btn btn-primary" onclick="postEditTrade()">确认修改</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-pane">
+                                <div class="panel-body">
+                                    <fieldset class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="upload-content">
+                                                <div class="content-img">
+                                                    <ul class="content-img-list"></ul>
+                                                    <div class="file">
+                                                        <i class="gcl gcladd"></i>
+                                                        <input type="file" name="file" accept="image/*" id="upload" multiple>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <h4>* 单击"+"图标添加图片，在图片上点击删除图标可以删除图片。</h4>
+                                            <p style="color: red"><strong>注意：暂时无法修改之前的图片，用户可以选择重新上传商品图片，或将此页面留空而不做任何更改。</strong></p>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12" align="right">
+                                                <button class="btn btn-white" onclick="toMySellTrade()">取消</button>
+                                                <button class="btn btn-primary" onclick="postEditTrade()">确认修改</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer" th:include="footer :: copyright"></div>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script th:src="@{/js/jquery-2.1.1.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+<!-- Peity -->
+<script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
+
+<!-- Custom and plugin javascript -->
+<script th:src="@{/js/inspinia.js}"></script>
+<script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+
+<!-- Toastr script -->
+<script th:src="@{/js/plugins/toastr/toastr.min.js}"></script>
+
+<!-- common -->
+<script th:src="@{/js/common.js}"></script>
+
+<!-- SUMMERNOTE -->
+<script th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
+
+<!-- Sweet alert -->
+<script th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script>
+
+<!-- Upload Images -->
+<script th:src="@{/js/uploadImg.js}"></script>
+
+<script th:inline="javascript">
+    function toMySellTrade(){ window.location.href="mySellTrade"; }
+    function postEditTrade() {
+        var name = document.getElementById("input-name").value;
+        var price = document.getElementById("input-price").value;
+        var description = document.getElementById("input-description").value;
+        if (name == "" || price == "" || description == ""){
+            swal("温馨提示", "请完善所有信息", "warning");
+            return;
+        }
+        var formFile = new FormData();
+        formFile.append('tid', "[[${trade.getTid()}]]");
+        formFile.append('name', name);
+        formFile.append('price', price);
+        formFile.append('description', description);
+        $.each(imgFile, function(i, file) {
+            formFile.append('imgList', file);
+            console.log(file);
+        });
+        $.ajax({
+            url: 'editTrade',
+            type: 'post',
+            cache: false, //上传文件不需要缓存
+            async : false,
+            data: formFile,
+            processData: false, // 此处是关键：告诉jQuery不要去处理发送的数据
+            contentType: false, // 此处是关键：告诉jQuery不要去设置Content-Type请求头
+            dataType: "text",
+            success: function (data) {
+                swal("商品信息已经更新！", "本次交易哈希：\n" + data, "success")
+                .then(function () {
+                    window.location.href="tradeDetail?tid=[[${trade.getTid()}]]";
+                });
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    }
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>二手交易系统 | 登录</title>
+
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+
+<link th:href="@{/css/animate.css}" rel="stylesheet" />
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+<!-- Sweet Alert -->
+<link th:href="@{/css/plugins/sweetalert/sweetalert.css}" rel="stylesheet"/>
+    
+</head>
+
+<body class="gray-bg">
+	<div class="middle-box text-center loginscreen animated fadeInDown">
+		<div>
+			<div>
+				<h2 class="logo-name">WG</h2>
+			</div>
+			<h3>欢迎进入二手物品交易系统</h3>
+			<!--<p>Login in. To see it in action.</p>-->
+			<form class="m-t" role="form" action="login" method="post">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="输入用户名" name="username" required="" autocomplete="off"/>
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" placeholder="输入密码" name="password" required="" autocomplete="off"/>
+				</div>
+				<button type="submit" class="btn btn-primary block full-width m-b">登  录</button>
+				<a class="btn btn-sm btn-white btn-block" th:href="@{register}" href="register">注  册</a>
+			</form>
+			<!--<p class="m-t">-->
+				<!--<small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>-->
+			<!--</p>-->
+			<br>
+			<a th:href="@{rootLogin}"><small>管理员登录</small></a>
+		</div>
+	</div>
+
+
+	<div class="footer" th:include="footer :: copyright"></div>
+
+	<!-- Mainly scripts -->
+	<script th:src="@{/js/jquery-2.1.1.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<!-- Sweet alert -->
+    <script th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script>
+
+	
+	<script th:inline="javascript">
+		var error = [[${error}]];
+		$(document).ready(function () {
+			if(error!=null){
+				 swal("温馨提示", error, "warning");
+			}
+		});
+
+	</script>
+</body>
+
+</html>
